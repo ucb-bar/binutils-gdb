@@ -1290,7 +1290,6 @@ static struct riscv_supported_ext riscv_supported_std_z_ext[] =
   {"zbkb",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"zbkc",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"zbkx",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
-  {"zbme",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"zk",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"zkn",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"zknd",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
@@ -1368,6 +1367,7 @@ static struct riscv_supported_ext riscv_supported_std_zxm_ext[] =
 
 static struct riscv_supported_ext riscv_supported_vendor_x_ext[] =
 {
+  {"xbme",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"xcvmac",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
   {"xcvalu",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
   {"xtheadba",		ISA_SPEC_CLASS_DRAFT,	1, 0, 0 },
@@ -2519,8 +2519,6 @@ riscv_multi_subset_supports (riscv_parse_subset_t *rps,
     case INSN_CLASS_ZBC_OR_ZBKC:
       return (riscv_subset_supports (rps, "zbc")
 	      || riscv_subset_supports (rps, "zbkc"));
-    case INSN_CLASS_ZBME:
-      return riscv_subset_supports (rps, "zbme");
     case INSN_CLASS_ZKND:
       return riscv_subset_supports (rps, "zknd");
     case INSN_CLASS_ZKNE:
@@ -2611,6 +2609,8 @@ riscv_multi_subset_supports (riscv_parse_subset_t *rps,
       return riscv_subset_supports (rps, "xventanacondops");
     case INSN_CLASS_XSFVCP:
       return riscv_subset_supports (rps, "xsfvcp");
+    case INSN_CLASS_XBME:
+      return riscv_subset_supports (rps, "xbme");
     default:
       rps->error_handler
         (_("internal: unreachable INSN_CLASS_*"));

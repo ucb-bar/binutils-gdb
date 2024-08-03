@@ -340,8 +340,13 @@ static inline unsigned int riscv_insn_length (insn_t insn)
 #define NVECR 32
 #define NVECM 1
 
+/* SiFive fields.  */
+#define OP_MASK_XSO2            0x3
+#define OP_SH_XSO2              26
+#define OP_MASK_XSO1            0x1
+#define OP_SH_XSO1              26
 
-/* Zbme fields.  */
+/* UC Berkeley (Xbme) fields.  */
 
 // #define OP_MASK_VD		0x1f
 // #define OP_SH_VD		7
@@ -366,12 +371,6 @@ static inline unsigned int riscv_insn_length (insn_t insn)
 // #define OP_MASK_VWD		0x1
 // #define OP_SH_VWD		26
 
-
-/* SiFive fields.  */
-#define OP_MASK_XSO2            0x3
-#define OP_SH_XSO2              26
-#define OP_MASK_XSO1            0x1
-#define OP_SH_XSO1              26
 
 /* ABI names for selected x-registers.  */
 
@@ -491,12 +490,12 @@ enum riscv_insn_class
   INSN_CLASS_ZCB_AND_ZBA,
   INSN_CLASS_ZCB_AND_ZBB,
   INSN_CLASS_ZCB_AND_ZMMUL,
-  INSN_CLASS_ZBME,
   INSN_CLASS_SVINVAL,
   INSN_CLASS_ZICBOM,
   INSN_CLASS_ZICBOP,
   INSN_CLASS_ZICBOZ,
   INSN_CLASS_H,
+  INSN_CLASS_XBME,
   INSN_CLASS_XCVMAC,
   INSN_CLASS_XCVALU,
   INSN_CLASS_XTHEADBA,

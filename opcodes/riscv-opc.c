@@ -110,15 +110,6 @@ const char * const riscv_vma[2] =
   "mu", "ma"
 };
 
-/* ZBME registers.  */
-const char riscv_matr_names_numeric[NVECR][NRC] =
-{
-  "m0",   "m1",   "m2",   "m3",   "m4",   "m5",   "m6",   "m7",
-  "m8",   "m9",   "m10",  "m11",  "m12",  "m13",  "m14",  "m15",
-  "m16",  "m17",  "m18",  "m19",  "m20",  "m21",  "m22",  "m23",
-  "m24",  "m25",  "m26",  "m27",  "m28",  "m29",  "m30",  "m31"
-};
-
 /* XTheadVector, List of vsetvli vlmul constants.  */
 const char * const riscv_th_vlen[4] =
 {
@@ -129,6 +120,15 @@ const char * const riscv_th_vlen[4] =
 const char * const riscv_th_vediv[4] =
 {
     "d1", "d2", "d4", "d8"
+};
+
+/* Xbme registers.  */
+const char riscv_ub_matr_names_numeric[NVECR][NRC] =
+{
+  "m0",   "m1",   "m2",   "m3",   "m4",   "m5",   "m6",   "m7",
+  "m8",   "m9",   "m10",  "m11",  "m12",  "m13",  "m14",  "m15",
+  "m16",  "m17",  "m18",  "m19",  "m20",  "m21",  "m22",  "m23",
+  "m24",  "m25",  "m26",  "m27",  "m28",  "m29",  "m30",  "m31"
 };
 
 /* The FLI.[HSDQ] symbolic constants (NULL for numeric constant).  */
@@ -2002,16 +2002,6 @@ const struct riscv_opcode riscv_opcodes[] =
 {"c.zext.b",   0, INSN_CLASS_ZCB, "Cs",  MATCH_C_ZEXT_B, MASK_C_ZEXT_B, match_opcode, 0 },
 {"c.sext.w",  64, INSN_CLASS_ZCB, "d",  MATCH_C_ADDIW, MASK_C_ADDIW|MASK_RVC_IMM, match_rd_nonzero, INSN_ALIAS },
 
-/* Zbme instructions.  */
-{"fmopacc",     0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_FMOPACC, MASK_FMOPACC, match_opcode, 0 },
-{"fwmopacc",    0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_FWMOPACC, MASK_FWMOPACC, match_opcode, 0 },
-{"mmv.m.v",     0, INSN_CLASS_ZBME,   "d,s,VtVm",      MATCH_MMV_M_V, MASK_MMV_M_V, match_opcode, 0 },
-{"mmv.v.m",     0, INSN_CLASS_ZBME,   "Vd,sVm",        MATCH_MMV_V_M, MASK_MMV_V_M, match_opcode, 0 },
-{"mopacc",      0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_MOPACC, MASK_MOPACC, match_opcode, 0 },
-{"mopaccu",     0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_MOPACCU, MASK_MOPACCU, match_opcode, 0 },
-{"wmopacc",     0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_WMOPACC, MASK_WMOPACC, match_opcode, 0 },
-{"wmopaccu",    0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_WMOPACCU, MASK_WMOPACCU, match_opcode, 0 },
-
 /* Supervisor instructions.  */
 {"csrr",       0, INSN_CLASS_ZICSR, "d,E",   MATCH_CSRRS, MASK_CSRRS|MASK_RS1, match_opcode, INSN_ALIAS },
 {"csrwi",      0, INSN_CLASS_ZICSR, "E,Z",   MATCH_CSRRWI, MASK_CSRRWI|MASK_RD, match_opcode, INSN_ALIAS },
@@ -2964,6 +2954,16 @@ const struct riscv_opcode riscv_opcodes[] =
 {"sf.vc.v.ivw", 0, INSN_CLASS_XSFVCP, "XsO2,Vd,Vt,Vi", MATCH_SF_VC_V_IVW, MASK_SF_VC_V_IVW, match_opcode, 0 },
 {"sf.vc.fvw",   0, INSN_CLASS_XSFVCP, "XsO1,Vd,Vt,S",  MATCH_SF_VC_FVW, MASK_SF_VC_FVW, match_opcode, 0 },
 {"sf.vc.v.fvw", 0, INSN_CLASS_XSFVCP, "XsO1,Vd,Vt,S",  MATCH_SF_VC_V_FVW, MASK_SF_VC_V_FVW, match_opcode, 0 },
+
+/* Vendor-specific (UC Berkeley) XBerkeleyMatrixExtension (Xbme) instructions.  */
+{"ub.fmopacc",  0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_FMOPACC,  MASK_UB_FMOPACC,  match_opcode, 0 },
+{"ub.fwmopacc", 0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_FWMOPACC, MASK_UB_FWMOPACC, match_opcode, 0 },
+{"ub.mmv.m.v",  0, INSN_CLASS_XBME,   "d,s,VtVm",      MATCH_UB_MMV_M_V,  MASK_UB_MMV_M_V,  match_opcode, 0 },
+{"ub.mmv.v.m",  0, INSN_CLASS_XBME,   "Vd,sVm",        MATCH_UB_MMV_V_M,  MASK_UB_MMV_V_M,  match_opcode, 0 },
+{"ub.mopacc",   0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_MOPACC,   MASK_UB_MOPACC,   match_opcode, 0 },
+{"ub.mopaccu",  0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_MOPACCU,  MASK_UB_MOPACCU,  match_opcode, 0 },
+{"ub.wmopacc",  0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_WMOPACC,  MASK_UB_WMOPACC,  match_opcode, 0 },
+{"ub.wmopaccu", 0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_WMOPACCU, MASK_UB_WMOPACCU, match_opcode, 0 },
 
 /* Terminate the list.  */
 {0, 0, INSN_CLASS_NONE, 0, 0, 0, 0, 0}

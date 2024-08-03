@@ -1456,15 +1456,6 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
 		  goto unknown_validate_operand;
 		}
 	      break;
-	    case 't': /* ZBME */
-	      switch (*++oparg)
-    {
-    case 'd': USE_BITS (OP_MASK_VD, OP_SH_VD); break;
-    default:
-      goto unknown_validate_operand;
-    }
-	      break; /* end ZBME */
-      
 	    default:
 	      goto unknown_validate_operand;
 	    }
@@ -3681,20 +3672,6 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 		      goto unknown_riscv_ip_operand;
 		    }
 		  break;
-
-    case 't': /* ZBME */
-      switch (*++oparg)
-        {
-          case 'd': /* VD */
-            if (!reg_lookup (&asarg, RCLASS_VECR, &regno))
-              break;
-            INSERT_OPERAND (VD, *ip, regno);
-            continue;
-          default:
-            goto unknown_riscv_ip_operand;
-        }
-	      break; /* end ZBME */
-      
 
 		default:
 		  goto unknown_riscv_ip_operand;
