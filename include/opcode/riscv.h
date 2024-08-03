@@ -340,6 +340,33 @@ static inline unsigned int riscv_insn_length (insn_t insn)
 #define NVECR 32
 #define NVECM 1
 
+
+/* Zbme fields.  */
+
+// #define OP_MASK_VD		0x1f
+// #define OP_SH_VD		7
+// #define OP_MASK_VS1		0x1f
+// #define OP_SH_VS1		15
+// #define OP_MASK_VS2		0x1f
+// #define OP_SH_VS2		20
+// #define OP_MASK_VIMM		0x1f
+// #define OP_SH_VIMM		15
+// #define OP_MASK_VMASK		0x1
+// #define OP_SH_VMASK		25
+// #define OP_MASK_VFUNCT6		0x3f
+// #define OP_SH_VFUNCT6		26
+// #define OP_MASK_VLMUL		0x7
+// #define OP_SH_VLMUL		0
+// #define OP_MASK_VSEW		0x7
+// #define OP_SH_VSEW		3
+// #define OP_MASK_VTA		0x1
+// #define OP_SH_VTA		6
+// #define OP_MASK_VMA		0x1
+// #define OP_SH_VMA		7
+// #define OP_MASK_VWD		0x1
+// #define OP_SH_VWD		26
+
+
 /* SiFive fields.  */
 #define OP_MASK_XSO2            0x3
 #define OP_SH_XSO2              26
@@ -464,6 +491,7 @@ enum riscv_insn_class
   INSN_CLASS_ZCB_AND_ZBA,
   INSN_CLASS_ZCB_AND_ZBB,
   INSN_CLASS_ZCB_AND_ZMMUL,
+  INSN_CLASS_ZBME,
   INSN_CLASS_SVINVAL,
   INSN_CLASS_ZICBOM,
   INSN_CLASS_ZICBOP,
