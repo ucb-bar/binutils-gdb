@@ -1979,16 +1979,6 @@ const struct riscv_opcode riscv_opcodes[] =
 {"c.zext.b",   0, INSN_CLASS_ZCB, "Cs",  MATCH_C_ZEXT_B, MASK_C_ZEXT_B, match_opcode, 0 },
 {"c.sext.w",  64, INSN_CLASS_ZCB, "d",  MATCH_C_ADDIW, MASK_C_ADDIW|MASK_RVC_IMM, match_rd_nonzero, INSN_ALIAS },
 
-/* Zbme instructions.  */
-{"fmopacc",     0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_FMOPACC, MASK_FMOPACC, match_opcode, 0 },
-{"fwmopacc",    0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_FWMOPACC, MASK_FWMOPACC, match_opcode, 0 },
-{"mmv.m.v",     0, INSN_CLASS_ZBME,   "d,Vt,sVm",      MATCH_MMV_M_V, MASK_MMV_M_V, match_opcode, 0 },
-{"mmv.v.m",     0, INSN_CLASS_ZBME,   "Vd,sVm",        MATCH_MMV_V_M, MASK_MMV_V_M, match_opcode, 0 },
-{"mopacc",      0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_MOPACC, MASK_MOPACC, match_opcode, 0 },
-{"mopaccu",     0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_MOPACCU, MASK_MOPACCU, match_opcode, 0 },
-{"wmopacc",     0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_WMOPACC, MASK_WMOPACC, match_opcode, 0 },
-{"wmopaccu",    0, INSN_CLASS_ZBME,   "Vd,Vt,VsVm",    MATCH_WMOPACCU, MASK_WMOPACCU, match_opcode, 0 },
-
 /* Supervisor instructions.  */
 {"csrr",       0, INSN_CLASS_ZICSR, "d,E",   MATCH_CSRRS, MASK_CSRRS|MASK_RS1, match_opcode, INSN_ALIAS },
 {"csrwi",      0, INSN_CLASS_ZICSR, "E,Z",   MATCH_CSRRWI, MASK_CSRRWI|MASK_RD, match_opcode, INSN_ALIAS },
@@ -2182,6 +2172,16 @@ const struct riscv_opcode riscv_opcodes[] =
 {"th.sync.i",        0, INSN_CLASS_XTHEADSYNC,  "",   MATCH_TH_SYNC_I,        MASK_TH_SYNC_I,        match_opcode, 0},
 {"th.sync.is",       0, INSN_CLASS_XTHEADSYNC,  "",   MATCH_TH_SYNC_IS,       MASK_TH_SYNC_IS,       match_opcode, 0},
 {"th.sync.s",        0, INSN_CLASS_XTHEADSYNC,  "",   MATCH_TH_SYNC_S,        MASK_TH_SYNC_S,        match_opcode, 0},
+
+/* Vendor-specific (UC Berkeley) XBerkeleyMatrixExtension (Xbme) instructions.  */
+{"ub.fmopacc",  0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_FMOPACC,  MASK_UB_FMOPACC,  match_opcode, 0 },
+{"ub.fwmopacc", 0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_FWMOPACC, MASK_UB_FWMOPACC, match_opcode, 0 },
+{"ub.mmv.m.v",  0, INSN_CLASS_XBME,   "d,s,VtVm",      MATCH_UB_MMV_M_V,  MASK_UB_MMV_M_V,  match_opcode, 0 },
+{"ub.mmv.v.m",  0, INSN_CLASS_XBME,   "Vd,sVm",        MATCH_UB_MMV_V_M,  MASK_UB_MMV_V_M,  match_opcode, 0 },
+{"ub.mopacc",   0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_MOPACC,   MASK_UB_MOPACC,   match_opcode, 0 },
+{"ub.mopaccu",  0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_MOPACCU,  MASK_UB_MOPACCU,  match_opcode, 0 },
+{"ub.wmopacc",  0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_WMOPACC,  MASK_UB_WMOPACC,  match_opcode, 0 },
+{"ub.wmopaccu", 0, INSN_CLASS_XBME,   "Vd,Vt,VsVm",    MATCH_UB_WMOPACCU, MASK_UB_WMOPACCU, match_opcode, 0 },
 
 /* Vendor-specific (Ventana Microsystems) XVentanaCondOps instructions */
 {"vt.maskc",   64, INSN_CLASS_XVENTANACONDOPS, "d,s,t", MATCH_VT_MASKC, MASK_VT_MASKC, match_opcode, 0 },
